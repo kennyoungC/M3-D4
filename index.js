@@ -75,7 +75,7 @@ let addSelected = (e) => {
   e.preventDefault();
   document.querySelector(`.cart`).classList.remove(`d-none`);
   const card = e.target.closest(".card");
-  card.classList.toggle("selected");
+  card.classList.add("selected");
 
   let ulNode = document.querySelector("ul");
   let list = document.createElement("li");
@@ -96,7 +96,12 @@ let addSelected = (e) => {
 
 const removeFromCart = (e) => {
   const singleCart = e.target.closest(`li`);
-  singleCart.remove();
+  const ul = singleCart.parentNode;
+  const children = ul.childNodes;
+  console.log(children);
+  if (children.length === 1) {
+    clearAll();
+  } else singleCart.remove();
 };
 const clearAll = () => {
   document.querySelector(`ul`).innerHTML = ``;
